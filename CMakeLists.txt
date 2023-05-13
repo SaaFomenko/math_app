@@ -1,19 +1,25 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(math_fn)
+project(math_app)
 
 # set the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 
 file(GLOB
-	lib_source "lib/*.cpp")
+	app_exception_src "lib/app_exception/*.cpp"
+	str_split_src "lib/str_split/*.cpp"
+	math_fn_src "lib/math_fn/*.cpp")
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-add_library(${PROJECT_NAME}_lib STATIC 
-	${lib_source})
+#add_library(math_fn_lib STATIC ${math_fn_src})
 
 add_executable(${PROJECT_NAME}.exe main.cpp 
-	${lib_source})
+	${math_fn_src}
+	${str_split_src}
+	${app_exception_src})
 
-target_link_libraries(${PROJECT_NAME}.exe ${PROJECT_NAME}_lib) 
+target_link_libraries(${PROJECT_NAME}.exe 
+	math_fn_lib
+	str_split_lib
+	app_exception_lib) 
