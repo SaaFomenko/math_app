@@ -1,6 +1,6 @@
 #include <iostream>
 #include "lib/str_split/str_split.h"
-#include "lib/math_fn/math_fn.h"
+#include "lib/math_fn/math_fn.cpp"
 
 
 int main()
