@@ -1,4 +1,4 @@
-# math_fn
+# math_app
 Example work with template C++, issue 1.
 
 This project with git submodule, for clone project need set command:
