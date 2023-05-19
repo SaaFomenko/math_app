@@ -3,6 +3,17 @@
 #include "lib/math_fn/math_fn.cpp"
 
 
+static const char* err = "Error: variable overload.";
+
+template<class T>
+void overload_throw(T orig, T result)
+{
+	if (result < 0 || (orig != 0 && result == 0))
+	{
+		throw err;
+	}
+}
+
 int main()
 {
 	const std::string in_quest = "[IN]: ";
@@ -21,8 +32,11 @@ int main()
 		{
 			try
 			{
-				int x = std::stoi(user_in);
-				std::cout << out_request << math_fn::sqrt<int>(x) << std::endl;
+				int orig = std::stoi(user_in);
+				int result = math_fn::sqrt<int>(orig);
+				overload_throw<int>(orig, result);
+
+				std::cout << out_request << result << std::endl;
 			}
 			catch(std::invalid_argument const& ex)
       {
@@ -32,6 +46,10 @@ int main()
       {
         std::cout << "std::out_of_range::what(): " << ex.what() << '\n';
       }
+			catch (const char* e)
+			{
+				std::cout << e << "\n";
+			}
 			catch (std::exception e)
 			{
 				std::cout << e.what() << std::endl;
@@ -39,14 +57,15 @@ int main()
 		}
 		else
 		{
-			std::vector<int> values;
+			std::vector<int> orig{};
 
 			for (std::string value_str : str_split(user_in, delimeter))
 			{
 				try
 				{
 					int x = std::stoi(value_str);
-					values.push_back(x);
+
+					orig.push_back(x);
 				}
 				catch(std::invalid_argument const& ex)
         {
@@ -56,19 +75,32 @@ int main()
         {
           std::cout << "std::out_of_range::what(): " << ex.what() << '\n';
         }
+				catch (const char* e)
+				{
+					std::cout << e << "\n";
+				}
 				catch (std::exception e)
 				{
 					std::cout << e.what() << std::endl;
 				}
 			}
 
-			math_fn::sqrt<std::vector<int>&>(values);
+			std::vector<int> result = math_fn::sqrt<std::vector<int>>(orig);
 
 			std::cout << out_request;
 			int i = 0;
-			for (int value : values)
+			for (int value_result : result)
 			{
-				std::cout << (i == 0 ? "" : delimeter) << value;
+				try
+				{
+					overload_throw(orig[i], value_result);
+					std::cout << (i == 0 ? "" : delimeter) << value_result;
+				}
+				catch (const char* e)
+				{
+					std::cout << e << "\n";
+				}
+
 				++i;
 			}
 			std::cout << "\n";

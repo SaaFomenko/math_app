@@ -1,6 +1,3 @@
-[submodule "lib/app_exception"]
-	path = lib/app_exception
-	url = git@github.com:SaaFomenko/app_exception.git
 [submodule "lib/math_fn"]
 	path = lib/math_fn
 	url = git@github.com:SaaFomenko/math_fn.git
