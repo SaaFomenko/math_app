@@ -92,12 +92,12 @@ int main()
 				}
 			}
 
-			math_fn::SumCountD get_sum(orig, devider);
+			math_fn::SumCountD get_sum(orig);
 			int sum_result = get_sum();
 			std::cout << out_sum << sum_result << std::endl;
 
 			math_fn::SumCountD get_count(orig, devider);
-			int count_result = get_count(true);
+			int count_result = get_count();
 			std::cout << out_count << count_result << std::endl;
 		}
 	}
