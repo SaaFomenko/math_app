@@ -17,8 +17,10 @@ void overload_throw(T orig, T result)
 int main()
 {
 	const std::string in_quest = "[IN]: ";
-	const std::string out_request = "[OUT]: ";
-	const std::string delimeter = ", ";
+	const std::string out_sum = "[OUT]: get_sum() =  ";
+	const std::string out_count = "[OUT]: get_count() =  ";
+	const std::string delimeter = " ";
+	int devider = 3;
 
 	std::string user_in = "";
 
@@ -33,10 +35,14 @@ int main()
 			try
 			{
 				int orig = std::stoi(user_in);
-				int result = math_fn::sqrt<int>(orig);
-				overload_throw<int>(orig, result);
 
-				std::cout << out_request << result << std::endl;
+				std::cout << out_sum << orig << std::endl;
+
+				int count = 0;
+				if ((orig % devider) == 0) ++count;
+
+
+				std::cout << out_count << count << std::endl;
 			}
 			catch(std::invalid_argument const& ex)
 			{
@@ -86,25 +92,13 @@ int main()
 				}
 			}
 
-			std::vector<int> result = math_fn::sqrt<std::vector<int>>(orig);
+			math_fn::SumCountD get_sum(orig, devider);
+			int sum_result = get_sum();
+			std::cout << out_sum << sum_result << std::endl;
 
-			std::cout << out_request;
-			int i = 0;
-			for (int value_result : result)
-			{
-				try
-				{
-					overload_throw(orig[i], value_result);
-					std::cout << (i == 0 ? "" : delimeter) << value_result;
-				}
-				catch (const char* e)
-				{
-					std::cout << e << "\n";
-				}
-
-				++i;
-			}
-			std::cout << "\n";
+			math_fn::SumCountD get_count(orig, devider);
+			int count_result = get_count(true);
+			std::cout << out_count << count_result << std::endl;
 		}
 	}
 
