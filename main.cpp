@@ -39,13 +39,14 @@ int main()
 				std::cout << out_request << result << std::endl;
 			}
 			catch(std::invalid_argument const& ex)
-      {
-        std::cout << "std::invalid_argument::what(): " << ex.what() << '\n';
-      }
-      catch(std::out_of_range const& ex)
-      {
-        std::cout << "std::out_of_range::what(): " << ex.what() << '\n';
-      }
+			{
+				std::cout << "std::invalid_argument::what(): " << ex.what() << '\n';
+      
+			}
+			catch(std::out_of_range const& ex)
+			{
+				std::cout << "std::out_of_range::what(): " << ex.what() << '\n';
+			}
 			catch (const char* e)
 			{
 				std::cout << e << "\n";
@@ -68,13 +69,13 @@ int main()
 					orig.push_back(x);
 				}
 				catch(std::invalid_argument const& ex)
-        {
-          std::cout << "std::invalid_argument::what(): " << ex.what() << '\n';
-        }
-        catch(std::out_of_range const& ex)
-        {
-          std::cout << "std::out_of_range::what(): " << ex.what() << '\n';
-        }
+				{
+					std::cout << "std::invalid_argument::what(): " << ex.what() << '\n';
+				}
+				catch(std::out_of_range const& ex)
+				{
+					std::cout << "std::out_of_range::what(): " << ex.what() << '\n';
+				}
 				catch (const char* e)
 				{
 					std::cout << e << "\n";
